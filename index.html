@@ -39,7 +39,7 @@
             <div>
                 <h3>Top Five Committers</h1>
                 <table class="table-emphasis table table-striped table-rounded">
-                    <tr><th>Author</th><th>Commit count</th></tr>
+                    <tr><th>Author</th><th># of Commits</th></tr>
                     {{#each committers}}
                     <tr>
                         <td>{{author}}</td>
@@ -50,6 +50,18 @@
             </div>
         </script>
         <script id="commits_per_template" type="text/x-handlebars-template">
+            <div>
+                <h3>Commits By Date</h1>
+                <table class="table-emphasis table table-striped table-rounded">
+                    <tr><th>Date</th><th># of Commits</th></tr>
+                    {{#each dates}}
+                    <tr>
+                        <td>{{date}}</td>
+                        <td>{{count}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
         </script>
         <script data-main="app/config" src="libs/require.js"></script>
     </body>

@@ -30,6 +30,29 @@ define([
             });
 
             return counts_array;
+        },
+
+        // return array of commits, 
+        // grouped by date, with a commit count for each
+        // Sorted by # of commits
+        commitsByDate: function () {
+
+            // create array of commits, indexed by date
+            var dates = _.countBy(this.models, function(commit) {
+                    return commit.get('commit').author.date.slice(0,10);
+                });
+
+            var dates_array = [];
+            _.each(dates, function (count, date) {
+                    dates_array.push({count: count, date: date});
+                });
+
+            dates_array.sort( function (a,b) {
+
+                return b.count - a.count;
+            });
+
+            return dates_array;
         }
     });
 

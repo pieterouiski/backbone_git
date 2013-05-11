@@ -8,26 +8,23 @@ define([
 
 ], function(app, Backbone, CommitsCollection, CommitModel) {
 
-    var commitsPerView = Backbone.View.extend({
+    var commitsPerDateView = Backbone.View.extend({
 
-        template: 'commits_per',
+        template: Handlebars.compile( $('#commits_per_template').html() ),
 
-        initialize: function () {
+        serialize: function ( coll ) {
+            // 
+            return { dates: coll.commitsByDate() };
         },
 
-        events: {
-            'click .launch-instance': function () {
-                Backbone.history.navigate('#workflows/instance', true);
-            }
-        },
-
-        serialize: function () {
-            return {
-            };
+        render: function( coll ) {
+            this.$el.html(this.template( this.serialize( coll )));
+            return this;
         }
 
     });
 
-    return commitsPerView;
+    return commitsPerDateView;
+
 });
 
