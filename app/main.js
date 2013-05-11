@@ -1,8 +1,6 @@
 require([
     'lodash',
 
-    'settings',
-
     'models/commit',
 
     'collections/commits',
@@ -11,7 +9,7 @@ require([
     'views/top_five',
     'views/commits_per'
 
-], function (_, settings,
+], function (_,
     CommitModel, CommitsCollection,
     LastFiveView, TopFiveView, CommitsPerView
 ) {

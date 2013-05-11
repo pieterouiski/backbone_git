@@ -1,12 +1,11 @@
 define([
-    'app',
     'backbone',
 
     'collections/commits',
 
     'models/commit'
 
-], function(app, Backbone, CommitsCollection, CommitModel) {
+], function(Backbone, CommitsCollection, CommitModel) {
 
     var topFiveView = Backbone.View.extend({
 
