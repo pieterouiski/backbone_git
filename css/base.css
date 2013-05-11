@@ -1,0 +1,97 @@
+h1 { font-size: 2em; line-height: 2em; }
+h2 { font-size: 1.500em; line-height: 1.500em; }
+h3 { font-size: 1.333em; line-height: 1.333em; }
+h4 { font-size: 1.167em; line-height: 1.167em; }
+h5 { font-size: 1em; line-height: 1em; }
+h6 { font-size: 1em; line-height: 1em; }
+
+/* Columns */
+/* ------- */
+.col1, .col2, .col3 {
+    float: left;
+    width: 33%;
+}
+
+/* Tables   */
+/* -------- */
+
+/* BASE TABLES */
+/* ----------- */
+
+table {
+  background-color: #efebeb;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 95%;
+  margin-bottom: 20px;
+  font-size: 0.9em; 
+  line-height: 1.0em;
+}
+
+/* BASELINE STYLES  */
+/* ---------------  */
+
+
+/* Cells */
+th, td {
+    padding: 4px;
+    text-align: left;
+    vertical-align: middle;
+    border-top: 1px solid #fff;
+    width:  100%;
+}
+
+div.message {
+    font-weight: bold;
+    font-size: 1.1em; 
+}
+
+span.author {
+    font-size: 1.0em; 
+    font-style: italic;
+}
+
+span.sha {
+    background-image: linear-gradient(#eff6f9, #ddecf3);
+    background-repeat: repeat-x;
+    border: 1px solid #cedee5;
+    padding: 2px;
+    font-size: 0.9em; 
+    float: right;
+    height: 18px;
+}
+
+th {
+    font-weight: bold;
+}
+
+// Bottom align for column headings
+thead th {
+    vertical-align: bottom;
+}
+
+
+/* CONDENSED TABLE W/ HALF PADDING  */
+/* -------------------------------  */
+
+th.table-condensed, td.table-condensed {
+    padding: 4px 5px;
+}
+
+/* ZEBRA-STRIPING */
+/* -------------- */
+
+/* Default zebra-stripe styles (alternating gray and transparent backgrounds) */
+
+/*table.table-striped > tr:nth-child(odd) > td { */
+table.table-striped > tr:nth-child(odd) > td {
+    background-color: #f9f9f9;
+}
+
+/* HOVER EFFECT */
+/* ------------ */
+/* Placed here since it has to come after the potential zebra striping */
+
+tbody.table-hover tr:hover td:hover {
+    background-color: #f5f5f5;
+}

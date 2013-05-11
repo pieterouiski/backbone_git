@@ -1,0 +1,56 @@
+<!doctype html>
+<!--[if IE 9]><html lang="en" class="no-js ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <title>GitHub Dashboard</title>
+    </head>
+    <body>
+        <div class="background"></div>
+        <div class="col1"></div>
+        <div class="col2"></div>
+        <div class="col3"></div>
+        <div role="main" class="main"></div>
+        <script id="last_five_template" type="text/x-handlebars-template">
+            <div>
+                <h3>Last Five Commits</h1>
+                <table class="table-emphasis table table-striped table-hover">
+                    {{#each commits}}
+                    <tr>
+                        <td>
+                            <p>{{message}}</p>
+                            <span class="author">
+                                {{author}}
+                            </span>
+                            <span class="sha">
+                                {{sha}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </script>
+        <script id="top_five_template" type="text/x-handlebars-template">
+            <div>
+                <h3>Top Five Committers</h1>
+                <table class="table-emphasis table table-striped table-rounded">
+                    <tr><th>Author</th><th>Commit count</th></tr>
+                    {{#each committers}}
+                    <tr>
+                        <td>{{author}}</td>
+                        <td>{{count}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </script>
+        <script id="commits_per_template" type="text/x-handlebars-template">
+        </script>
+        <script data-main="app/config" src="libs/require.js"></script>
+    </body>
+</html>
