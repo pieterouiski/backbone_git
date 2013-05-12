@@ -15,10 +15,8 @@ require.config({
         // JQUERY
         'jquery': '../libs/jquery/jquery',
         'jquery.ui': '../libs/jquery/jquery.ui',
-        'jquery.ui.widget': '../libs/jquery/jquery.ui.widget',
+        'jquery.ui.widget': '../libs/jquery/jquery.ui.widget'
 
-        // BOOTSTRAP
-        'bootstrap.min': '../libs/bootstrap.min'
     },
 
     // NOTE: the old 'use' has been replaced in favor of 'shim'.
