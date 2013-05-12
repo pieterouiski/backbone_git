@@ -7,9 +7,15 @@ h6 { font-size: 1em; line-height: 1em; }
 
 /* Columns */
 /* ------- */
-.col1, .col2, .col3 {
+.column {
     float: left;
     width: 33%;
+}
+
+.bottom {
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
 }
 
 /* Tables   */
