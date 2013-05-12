@@ -13,7 +13,7 @@ define([
 
         // initial fetch, store the deferred
         initialize: function() {
-            this.deferred = this.fetch({error: this.handleErrors});
+            this.deferred = this.fetch({reset: true, error: this.handleErrors});
         },
 
         handleErrors: function(collection, response, options) {
