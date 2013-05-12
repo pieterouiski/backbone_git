@@ -13,7 +13,11 @@ define([
 
         // initial fetch, store the deferred
         initialize: function() {
-            this.deferred = this.fetch();
+            this.deferred = this.fetch({error: this.handleErrors});
+        },
+
+        handleErrors: function(collection, response, options) {
+            alert('ERROR:  failed to retrieve Collaborators.  \nStatus:   '+response.status+'  \nReason: '+response.statusText);
         }
 
     });

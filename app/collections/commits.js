@@ -11,7 +11,7 @@ define([
         model: Commit,
 
         initialize: function () {
-            this.deferred = this.fetch({data: {per_page: 100}});
+            this.deferred = this.fetch({data: {per_page: 100}, error: this.handleErrors});
         },
 
         // extract the last five commits
@@ -66,6 +66,10 @@ define([
             });
 
             return dates_array;
+        },
+
+        handleErrors: function(collection, response, options) {
+            alert('ERROR:  failed to retrieve Commits.  \nStatus:   '+response.status+' \nReason: '+response.statusText);
         }
     });
 
