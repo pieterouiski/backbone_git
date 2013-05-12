@@ -3,6 +3,7 @@ backbone_git
 
 Backbone application showing Git activity for a given repository
 
+
 Requirements:
 
 Make a small Backbone app using the Github API
