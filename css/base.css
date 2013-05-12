@@ -18,6 +18,21 @@ h6 { font-size: 1em; line-height: 1em; }
     width: 25%;
 }
 
+.slackers {
+    clear: both;
+    padding: 4px;
+    border: 2px solid #cedee5;
+}
+
+.slackers table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.slackers h3 {
+    margin-left: 9px;
+}
+
 /* Tables   */
 /* -------- */
 
@@ -53,7 +68,7 @@ div.message {
 }
 
 span.author {
-    font-size: 1.0em; 
+    font-size: 1.1em; 
     font-style: italic;
 }
 
@@ -64,7 +79,8 @@ span.sha {
     padding: 2px;
     font-size: 0.9em; 
     float: right;
-    height: 18px;
+    height: 15px;
+    margin-bottom: 0px;
 }
 
 th {
