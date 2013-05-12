@@ -33,6 +33,14 @@ h6 { font-size: 1em; line-height: 1em; }
     margin-left: 9px;
 }
 
+button.first {
+    background-image: linear-gradient(#eff6f9, rgb(80, 191, 243));
+}
+button.next {
+    background-image: linear-gradient(rgb(80, 191, 243), #eff6f9);
+    float: right;
+}
+
 /* Tables   */
 /* -------- */
 
