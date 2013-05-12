@@ -9,6 +9,14 @@ define([
 
     var lastFiveView = Backbone.View.extend({
 
+        initialize: function (options) {
+
+            _.extend(this, options || {});
+            render = _.bind(this.render, this);
+
+            this.commits.deferred.done( render );
+        },
+
         template: Handlebars.compile( $('#last_five_template').html() ),
 
         pickCommits: function (com) {
@@ -19,15 +27,15 @@ define([
             };
         },
 
-        serialize: function ( coll ) {
-            var parsed_commits = _.map( coll.lastFive(), this.pickCommits );
+        serialize: function () {
+            var parsed_commits = _.map( this.commits.lastFive(), this.pickCommits );
             return {
                 commits:  parsed_commits
             };
         },
 
-        render: function( coll ) {
-            this.$el.html(this.template( this.serialize( coll ) ));
+        render: function() {
+            this.$el.html(this.template( this.serialize() ));
             return this;
         }
 

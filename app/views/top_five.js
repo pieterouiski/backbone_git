@@ -9,22 +9,24 @@ define([
 
     var topFiveView = Backbone.View.extend({
 
+       initialize: function (options) {
+
+            _.extend(this, options || {});
+            render = _.bind(this.render, this);
+
+            this.commits.deferred.done( render );
+        },
+
         template: Handlebars.compile( $('#top_five_template').html() ),
 
-        pickCommitter: function (com) {
-            return { 
-                author: com,
-                count:  com
-            };
+        serialize: function () {
+            // return an object containing the last 5 commits (just the
+            // author and commit count)
+            return { committers: this.commits.commitCount().slice(0,5) };
         },
 
-        serialize: function ( coll ) {
-            // 
-            return { committers: coll.commitCount().slice(0,5) };
-        },
-
-        render: function( coll ) {
-            this.$el.html(this.template( this.serialize( coll )));
+        render: function() {
+            this.$el.html(this.template( this.serialize()));
             return this;
         }
 

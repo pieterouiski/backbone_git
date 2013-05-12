@@ -9,15 +9,24 @@ define([
 
     var commitsPerDateView = Backbone.View.extend({
 
-        template: Handlebars.compile( $('#commits_per_template').html() ),
+       initialize: function (options) {
 
-        serialize: function ( coll ) {
-            // 
-            return { dates: coll.commitsByDate() };
+            _.extend(this, options || {});
+            render = _.bind(this.render, this);
+
+            this.commits.deferred.done( render );
         },
 
-        render: function( coll ) {
-            this.$el.html(this.template( this.serialize( coll )));
+        template: Handlebars.compile( $('#commits_per_template').html() ),
+
+        serialize: function ( ) {
+            // return an object containing a list of Dates, with the number of
+            // commits that occurred on each Date
+            return { dates: this.commits.commitsByDate() };
+        },
+
+        render: function( ) {
+            this.$el.html(this.template( this.serialize()));
             return this;
         }
 
