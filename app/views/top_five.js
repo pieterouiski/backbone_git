@@ -1,15 +1,17 @@
+// a view of the Top 5 contributors in the current collection of Commits
+// with a count of commits for each
+//
 define([
-    'backbone',
+    'backbone'
 
-    'collections/commits',
-
-    'models/commit'
-
-], function(Backbone, CommitsCollection, CommitModel) {
+], function( Backbone ) {
 
     var topFiveView = Backbone.View.extend({
 
-       initialize: function (options) {
+        // when the Commits collection is finished fetching, call the render
+        // function to display the results
+        //
+        initialize: function (options) {
 
             _.extend(this, options || {});
             render = _.bind(this.render, this);
@@ -17,10 +19,14 @@ define([
             this.commits.deferred.done( render );
         },
 
+        // create a template function
         template: Handlebars.compile( $('#top_five_template').html() ),
 
+        // return just the first 5 committers, obtained by asking the
+        // Commits collection for a list of commiters with a count for each
+        //
         serialize: function () {
-            // return an object containing the last 5 commits (just the
+            // return an object containing the first 5 commits (just the
             // author and commit count)
             return { committers: this.commits.commitCount().slice(0,5) };
         },

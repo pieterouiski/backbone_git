@@ -1,3 +1,5 @@
+// an individual commit (checkin) to a GitHub repository
+//
 define([
     'lodash',
     'backbone'
@@ -5,7 +7,6 @@ define([
 ], function (_, Backbone) {
 
     var model = Backbone.Model.extend({
-        urlRoot: '/repos/documentcloud/backbone/commit',
         obj_type: 'commit',
         idAttribute: 'sha'
     });

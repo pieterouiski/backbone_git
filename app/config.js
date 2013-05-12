@@ -1,8 +1,7 @@
-//
-// This is the starting point of our Backbone application.
-// We are configuring require by setting paths to oft used items
+// The starting point of our Backbone application.
+// Configure require by setting paths to oft used items
 // Also are loading non-amd modules via shims
-
+//
 require.config({
     deps: ['main'],
 
