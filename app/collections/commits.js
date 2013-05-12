@@ -7,6 +7,10 @@ define([
         url: 'https://api.github.com/repos/documentcloud/backbone/commits',
         model: Commit,
 
+        initialize: function () {
+            this.deferred = this.fetch();
+        },
+
         // last five commits
         lastFive: function () {
             return this.models.slice(0,5);
