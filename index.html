@@ -9,10 +9,13 @@
     </head>
     <body>
         <div class="background"></div>
-        <div class="col1"></div>
-        <div class="col2"></div>
-        <div class="col3"></div>
+        <div class="column last_five"></div>
+        <div class="column top_five"></div>
+        <div class="column by_date"></div>
+        <div class="bottom slackers"></div>
+
         <div role="main" class="main"></div>
+
         <script id="last_five_template" type="text/x-handlebars-template">
             <div>
                 <h3>Last Five Commits</h1>
@@ -28,8 +31,6 @@
                                 {{sha}}
                             </span>
                         </td>
-                    </tr>
-                    <tr>
                     </tr>
                     {{/each}}
                 </table>
@@ -58,6 +59,18 @@
                     <tr>
                         <td>{{date}}</td>
                         <td>{{count}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </script>
+        <script id="slackers_template" type="text/x-handlebars-template">
+            <div>
+                <h3>Lazy Good-For-Nothing Slackers!!</h1>
+                <table class="table-emphasis table table-striped table-rounded">
+                    {{#each slackers}}
+                    <tr>
+                        <td>{{this}}</td>
                     </tr>
                     {{/each}}
                 </table>

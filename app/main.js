@@ -4,40 +4,28 @@ require([
     'models/commit',
 
     'collections/commits',
+    'collections/collaborators',
 
     'views/last_five',
     'views/top_five',
-    'views/commits_per'
+    'views/commits_per',
+    'views/slackers'
 
 ], function (_,
-    CommitModel, CommitsCollection,
-    LastFiveView, TopFiveView, CommitsPerView
+    CommitModel, CommitsCollection, CollaboratorsCollection,
+    LastFiveView, TopFiveView, CommitsPerView, SlackersView
 ) {
 
-    this.displayResults = function(collection, response, options) {
-
-        lastFiveView.render( collection );
-        topFiveView.render( collection );
-        commitsPerView.render( collection );
-    };
-
-    this.handleErrors = function(collection, response, options) {
-        console.log("error");
-    };
-
     var commits = new CommitsCollection();
+    var collaborators = new CollaboratorsCollection();
 
-    // setup the three views
-    var lastFiveView = new LastFiveView({collection: commits, el: $('.col1')});
+    // create the four views
+    var lastFiveView = new LastFiveView({commits: commits, el: $('.last_five')});
 
-    var topFiveView = new TopFiveView({collection: commits, el: $('.col2')});
+    var topFiveView = new TopFiveView({commits: commits, el: $('.top_five')});
 
-    var commitsPerView = new CommitsPerView({collection: commits, el: $('.col3')});
+    var commitsPerView = new CommitsPerView({commits: commits, el: $('.by_date')});
 
-
-    commits.fetch({ 
-            success: displayResults,
-            error: handleErrors
-        });
+    var slackersView = new SlackersView({commits: commits, collaborators: collaborators, el: $('.slackers')});
 
 });
