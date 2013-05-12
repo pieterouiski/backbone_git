@@ -19,9 +19,10 @@ define([
        initialize: function (options) {
 
             _.extend(this, options || {});
-            render = _.bind(this.render, this);
+            var render = _.bind(this.render, this);
 
             this.commits.deferred.done( render );
+            this.commits.on('reset', render);
         },
 
         // create template function

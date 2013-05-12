@@ -15,9 +15,12 @@ define([
         initialize: function (options) {
 
             _.extend(this, options || {});
-            render = _.bind(this.render, this);
+            var render = _.bind(this.render, this);
 
             $.when(this.commits.deferred, this.collaborators.deferred).done(render);
+
+            this.commits.on('reset', render);
+            this.collaborators.on('reset', render);
         },
 
         // create a template function
@@ -38,7 +41,13 @@ define([
             _.forEach(names, function (name) {
 
                     var non_slacker = that.commits.find( function(commit) {
-                            return commit.get('author').login === name;
+
+                            // most commits have an 'author.login'
+                            if (commit.has('author')) {
+                                return commit.get('author').login === name;
+                            }
+                            // others only have a 'commit.author.name'
+                            return commit.get('commit').author.name === name;
                         });
 
                     if (non_slacker === undefined) {

@@ -22,7 +22,7 @@ require([
 ) {
 
     // create the two collections.
-    // Each one has a 'fetch()' in it's initialize function
+    // Each one triggers a fetch() in its constructor
     //
     var commits = new CommitsCollection();
     var collaborators = new CollaboratorsCollection();
@@ -32,11 +32,12 @@ require([
     // finished
     //
     var lastFiveView = new LastFiveView({commits: commits, el: $('.last_five')});
-
     var topFiveView = new TopFiveView({commits: commits, el: $('.top_five')});
-
     var commitsPerView = new CommitsPerView({commits: commits, el: $('.by_date')});
-
     var slackersView = new SlackersView({commits: commits, collaborators: collaborators, el: $('.slackers')});
 
+    // when the next/first buttons are clicked,
+    // tell the 'commits' collection to move forward/backward one page
+    $('.next').bind('click', function () { commits.fetchNext() });
+    $('.first').bind('click', function () { commits.fetchFirst() });
 });

@@ -10,8 +10,32 @@ define([
         url: 'https://api.github.com/repos/documentcloud/backbone/commits',
         model: Commit,
 
+        next_page:  null, // url to the next page of commits
+        first_page: null, // url to the first page of commits
+
         initialize: function () {
-            this.deferred = this.fetch({data: {per_page: 100}, error: this.handleErrors});
+
+            this._getHeaders = _.bind(this.getHeaders, this);
+
+            this.deferred = this.fetch({data: {per_page: 100}, reset: true, success: this._getHeaders, error: this.handleErrors});
+        },
+
+        // Using the saved 'next page' URL  (saved in 'getHeaders()' below )
+        // fetch the next page of Commits
+        //
+        fetchNext: function () {
+            if (this.next_page) {
+                this.deferred = this.fetch({url: this.next_page, data: {per_page: 100}, reset: true, success: this._getHeaders, error: this.handleErrors});
+            }
+        },
+
+        // Using the saved 'first page' URL  ( saved in 'getHeaders()' below )
+        // fetch the first page of Commits
+        //
+        fetchFirst: function () {
+            if (this.first_page) {
+                this.deferred = this.fetch({url: this.first_page, data: {per_page: 100}, reset: true, success: this._getHeaders, error: this.handleErrors});
+            }
         },
 
         // extract the last five commits
@@ -25,7 +49,8 @@ define([
 
             // create array of committers, with a count of commits for each
             var counts = _.countBy(this.models, function(commit) { 
-                    return commit.get('author').login; 
+
+                    return commit.get('author') ? commit.get('author').login : commit.get('commit').author.name; 
                 });
 
             // convert array of counts into an array of objects with count &
@@ -70,6 +95,15 @@ define([
 
         handleErrors: function(collection, response, options) {
             alert('ERROR:  failed to retrieve Commits.  \nStatus:   '+response.status+' \nReason: '+response.statusText);
+        },
+
+        getHeaders: function(collection, response, options) {
+
+            var link = this.deferred.getResponseHeader('Link');
+            var reg = /<(.*?)>.*<(.*?)>/;
+            var arr = reg.exec(link);
+            this.next_page = arr[1];
+            this.first_page = arr[2];
         }
     });
 
