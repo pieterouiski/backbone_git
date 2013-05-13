@@ -53,16 +53,30 @@
         </script>
         <script id="commits_per_template" type="text/x-handlebars-template">
             <div>
-                <h3>Commits By Date</h1>
+                <h3>Commits grouped by: {{slice_size}} {{slice_units}}</h1>
                 <table class="table-emphasis table table-striped table-rounded">
-                    <tr><th>Date</th><th># of Commits</th></tr>
-                    {{#each dates}}
+                    <tr><th>Interval</th><th># of Commits</th></tr>
+                    {{#each slices}}
                     <tr>
-                        <td>{{date}}</td>
+                        <td>{{startDate}} - {{endDate}}</td>
                         <td>{{count}}</td>
                     </tr>
                     {{/each}}
                 </table>
+                <div class="slice_chooser">
+                    <div>
+                        <label for="size">Group commits by:</label>
+                        <input id="size" class="slice_size" value="{{slice_size}}" size="4"/>
+                        <select name="slice_units" class="slice_units">
+                            <option value="Days">days</option>
+                            <option value="Weeks">weeks</option>
+                            <option value="Months">months</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="update">Update</button>
+                    </div>
+                </div>
             </div>
         </script>
         <script id="slackers_template" type="text/x-handlebars-template">

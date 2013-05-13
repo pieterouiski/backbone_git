@@ -41,6 +41,22 @@ button.next {
     float: right;
 }
 
+.slice_chooser {
+    border: 1px solid rgb(80, 191, 243);
+    padding: 3px;
+    font-size: 0.8em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    margin-bottom: 5px;
+}
+
+button.update {
+    margin-left: 185px;
+    padding: 2px;
+    background-image: linear-gradient(rgb(243, 184, 80), rgb(199, 199, 164));
+}
+
 /* Tables   */
 /* -------- */
 
