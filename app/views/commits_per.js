@@ -46,7 +46,7 @@ define([
         // commits that occurred on each Date
         //
         serialize: function ( ) {
-            return { slice_units: this.slice_units, slice_size: this.slice_size, slices: this.commits.commitsBySlice(this.time_slice) };
+            return { slice_units: this.slice_units, slice_size: this.slice_size, slices: this.commits.commitsBySlice(this.time_slice).reverse() };
         },
 
         render: function( ) {

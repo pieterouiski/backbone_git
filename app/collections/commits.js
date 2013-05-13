@@ -115,8 +115,7 @@ define([
         },
 
         // return array of intervals, with a count of commits in that interval
-        // sorted by interval
-        // @slice : # of milliseconds in the slice
+        // @slice : # of milliseconds in a slice
         //
         // Assumes collection is sorted by 'timestamp' attribute
         // (in descending order)
@@ -124,7 +123,9 @@ define([
         commitsBySlice: function( time_slice ) {
 
             var that = this;
-            var last = -1;
+            var new_end = -1;
+            var old_end = -1;
+
             var intervals = [];
             var interval = null;
 
@@ -133,33 +134,68 @@ define([
                 // this models timestamp
                 var timestamp = model.get('timestamp');
 
-                if (last === -1 || timestamp < last) { 
+                while ( !interval || (! that.fallsWithin( timestamp, new_end, old_end ))) {
 
-                    // first time through, or at the end of the current
-                    // interval,
-                    // create a new interval
+                    // the current model doesn't fall within the current
+                    // interval (or there isn't a current interval yet)
+                    // create a new one with the next (incremented) 
+                    // end-points
+                    
+                    // First time through, the old-end of the interval is based on the
+                    // current models timestamp,
+                    // otherwise it's the old-end of the previous interval
                     //
-                    last = timestamp - time_slice;
+                    // establish endpoints for the starting interval
+                    //
+                    new_end = interval ? old_end : timestamp;
+                    old_end = new_end - time_slice;
 
-                    var endDate = new Date( timestamp ).toDateString(); // newest commit
-                    var startDate = new Date( last ).toDateString(); // oldest commit
-
-                    interval = { first: timestamp, last: last, startDate: startDate, endDate: endDate, count: 1 };
+                    // create a new interval
+                    interval = that.createInterval( new_end, old_end );
                     intervals.push( interval );
-
-                } else {
-                    // still within the current interval, increment the count
-                    interval.count += 1;
                 }
+
+                interval.count += 1;
             });
 
             return intervals;
         },
 
+        // creates a new Interval object, which contains the beginning and
+        // ending dates, plus a count of commits
+        //
+        createInterval: function (new_ts, old_ts) {
+
+            var new_date = new Date( new_ts ).toDateString(); // newest commit
+            var old_date = new Date( old_ts ).toDateString(); // oldest commit
+
+            var interval = { new_end: new_ts, old_end: old_ts, new_date: new_date, old_date: old_date, count: 0 };
+            return interval;
+        },
+
+        // convenience function for checking if a given timestamp falls within
+        // the beginning and ending times
+        // (from the newest timestamp to just after the oldest timestamp)
+        //
+        fallsWithin: function (ts, end, start) {
+            if (ts <= end && ts > start) {
+                return true;
+            }
+            return false;
+        },
+
+        // really should have more here.  Most likely error will be due to the
+        // 60-query's per hour limit
+        //
         handleErrors: function(collection, response, options) {
             alert('ERROR:  failed to retrieve Commits.  \nStatus:   '+response.status+' \nReason: '+response.statusText);
         },
 
+        // retrieve the 'Link' header value for use in pagination
+        // GitHub insists on using their supplied Link value instead of relying
+        // on the '?page=' query string
+        // Mainly because pages are less relevant than SHA values...
+        //
         getHeaders: function(collection, response, options) {
 
             var link = this.deferred.getResponseHeader('Link');
