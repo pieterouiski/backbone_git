@@ -8,7 +8,7 @@ define([
 
     var collection = Backbone.Collection.extend({
 
-        url: 'https://api.github.com/repos/documentcloud/backbone/collaborators',
+        url: 'https://api.github.com/repos/jashkenas/backbone/collaborators',
         model: Collaborator,
 
         // initial fetch, store the deferred

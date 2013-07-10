@@ -8,7 +8,7 @@ define([
 
     var collection = Backbone.Collection.extend({
 
-        url: 'https://api.github.com/repos/documentcloud/backbone/commits',
+        url: 'https://api.github.com/repos/jashkenas/backbone/commits',
         model: Commit,
 
         next_page:  null, // url to the next page of commits
